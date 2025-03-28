@@ -1,4 +1,4 @@
-const mongoose = require('express');
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
 
@@ -19,7 +19,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: ['admin', 'user'],
         default: 'user'
-    }
+    },
+    tasks: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Task',  
+    }],
+}, {
+    timestamps: true
 })
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+module.exports = User;
